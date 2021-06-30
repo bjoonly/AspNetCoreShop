@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Shop.Models.Category>
+
+    <div class="container-fluid p-0">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-dark">Category List</h2>
+            </div>
+            <div class="col-6 d-flex">
+                <a class="btn btn-success align-self-end ml-auto" asp-controller="Category" asp-action="Create"> Create new category</a>
+            </div>
+        </div>
+        @if (Model.Count() > 0)
+        {
+        <table class="table table-bordered table-striped my-3 ">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        Category Name
+                    </th>
+                    <th>
+                        Show Order
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                <tr>
+                    <td width="50%">@item.Name</td>
+                    <td width="20%">@item.ShowOrder</td>
+                    <td >
+                        <div class="row px-2">
+                            <a class="btn btn-warning col mx-1 mx-lg-3  " asp-route-Id="@item.Id" asp-controller="Category" asp-action="Edit">Edit</a>
+                            <a class="btn btn-danger col mx-1 mx-lg-3 " asp-route-Id="@item.Id" asp-controller="Category" asp-action="Delete">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+        else
+        {
+        <p>No categories found. </p>
+        }
+    </div>
