@@ -1,0 +1,48 @@
+﻿@model Shop.Models.ViewModels.ProductUserVM
+
+<form method="post" >
+    <h2>Order</h2>
+    <div asp-validation-summary="ModelOnly"  class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="AppUser.Email"></label>
+        <input asp-for="AppUser.Email" class="form-control" />
+        <span asp-validation-for="AppUser.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AppUser.Name"></label>
+        <input asp-for="AppUser.Name" class="form-control" />
+        <span asp-validation-for="AppUser.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AppUser.Surname"></label>
+        <input asp-for="AppUser.Surname" class="form-control" />
+        <span asp-validation-for="AppUser.Surname" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AppUser.PhoneNumber"></label>
+        <input asp-for="AppUser.PhoneNumber" class="form-control" />
+        <span asp-validation-for="AppUser.PhoneNumber" class="text-danger"></span>
+    </div>
+    <div  style="overflow-y:auto; max-height:15rem;">
+        @foreach (var item in Model.ProductList)
+        {
+            <div class="container-fluid mx-0 px-0 row">
+                <div class="col-8 px-0 col-lg-8">
+                    <h5>@item.Name</h5>
+                    <div style="font-size:11px;">@item.ShortDesc</div>
+                </div>
+                <div class="col-4 text-right py-2 pt-lg-4" style="font-size:11px;">
+                    <span style="font-size:17px;"> @item.Price</span> UAH
+
+                </div>
+            </div>
+            <hr />
+
+        }
+    </div>
+    <button type="submit" class="btn btn-success my-2">Submit</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

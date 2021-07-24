@@ -1,12 +1,68 @@
-﻿@model Shop.Models.Product
+﻿@model Shop.Models.ViewModels.DetailsVM
+
+<form method="post">
+    <input asp-for="@Model.Product.Id" hidden />
+    <div class="container p-3  px-md-5">
+        <div class="h-100 card  mb-3 ">
+            <div class="card-header row  m-0">
+                <div class="col-9  px-0">
+                    <h3 class="card-text"> @Model.Product.Name</h3>
+                </div>
+                <div class="col-3 text-right  px-0">
+                    <h4 class="card-text font-weight-bold text-danger">@Model.Product.Price &#8372;</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class=" row">
+                    @if (Model.Product.Image == null)
+                    {
+                        <div class="col-12 col-md-4">
+                            <span class="btn bg-warning  mt-0 mb-auto ">@Model.Product.Category.Name</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-12 col-md-4 ">
+                            <img class="w-100 my-2 px-0 col" src="@ENV.ImagePath@Model.Product.Image" />
+                            <span class="btn bg-warning my-3 mt-md-0 mb-md-auto ">@Model.Product.Category.Name</span>
+                        </div>
+                    }
+                    <div class="col-12 col-md-8">
+                        <div class="row">
+                            <div class="col">
+
+                                <span>@Html.Raw(Model.Product.Description) </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
-<div class="">
-    <form method="post">
-        <input asp-for="@Model.Id" hidden />
-        
-    </form>
-</div>
+            </div>
+            <div class="card-footer">
+
+                <div class="row">
+                    <div class="col">
+                        @if (Model.InCart)
+                        {
+                            <a asp-action="RemoveFromCart" asp-route-id="@Model.Product.Id" class="btn btn-danger col w-75">Remove from cart</a>
+                        }
+                        else
+                        {
+                            <button type="submit"  asp-route-id="@Model.Product.Id"  class="btn btn-success col w-75">Add to cart</button>
+                        }
+                    </div>
+                    <div class="col text-right">
+                        <a asp-action="Index" class="btn btn-info col w-75"> Back</a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
 
 
 
